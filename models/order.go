@@ -16,3 +16,8 @@ type Orders struct {
 	Total_item int `json:"total_item"`
 	Pay int `json:"pay"`
 }
+
+type Query struct {
+	Phone string `json:"phone"`
+	Date  string `json:"date"`
+}

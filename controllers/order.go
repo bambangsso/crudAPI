@@ -62,12 +62,12 @@ func OrderShowByDate(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 	c.Header("Access-Control-Allow-Origin", "*")
   
-	var order models.Orders
-	c.BindJSON(&order)
+	var query models.Query
+	c.BindJSON(&query)
   
 	var orders []models.Orders
   
-	if err := models.MPosGORM.Raw("SELECT * from orders where phone = ? AND date(create_dtm) = to_date(?, 'DD-Mon-YYYY')", order.Phone, order.Create_dtm).Scan(&orders).Error; err != nil {
+	if err := models.MPosGORM.Raw("SELECT * from orders where phone = ? AND date(create_dtm) = to_date(?, 'DD-Mon-YYYY')", query.Phone, query.Date).Scan(&orders).Error; err != nil {
 		fmt.Printf("error show order by date: %3v \n", err)
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
